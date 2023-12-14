@@ -1,5 +1,5 @@
-Decoration
-# Assignment 4: Text Classification
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/whVWeVGo)
+# Assignment 3: Vector Space Query
 **Westmont College Fall 2023**
 
 **CS 128 Information Retrieval and Big Data**
@@ -7,17 +7,17 @@ Decoration
 *Assistant Professor* Mike Ryu (mryu@westmont.edu) 
 
 ## Autor Information
-* **Name(s)**: Silas Ten Elshof, Luke Rozinskas
-* **Email(s)**: stenelshof@westmont.edu, lrozinskas@westmont.edu
+* **Name(s)**: Silas Ten Elshof
+* **Email(s)**: stenelshof@westmont.edu
 
 ## Problem Description
-Implement a Naive Bayes Text Classifier using the provided abstract models. We will write our own source code to implement these models and make a generic text classifier and print out the most informative features at the end.
 
-## Corpus and Feature Selection
-For this project, we chose to use the pros_cons corpus from the nltk library. This corpus contains descriptions of either pros or cons for products like phones and cameras. We chose this corpus because it is sizeable and it has clear categories that our code can classify things as (pros or cons). We should be able to clearly identify which features are the most informative for classifying descriptions as either pros or cons. For our features, we chose to look at every word in each sentence (after removing stopwords). We saw that some words had higher probablities of being associated with the pro class as opposed to the con class (and vice versa) so we simply iterated through every word for our features.
+Create a type of ranked retrieval that can be used to rank the results of president's Inaugural Speeches speeches based off of which ones are most relevant to the query terms. The scores will be determined using a vector space model and cosine similarities. The problem aslo involves writing good tests to cover all of the logic of the code that I wrote as well as covering obsure inputs. 
 
-## Implementation Strategy
-For this project, we began by implementing the abstract methods that were given to us. The first class that we implemented was build for feature sets. For this method, we chose to add the parameter of nltk's stopwords. For a given source object, we chose to build feature sets by getting rid of stopwords and punctuation and then iterating through each word. The features are simply each word that appears with the value True associated with it. Then we implemented the gamma method. In this method, we look at all of the feature probablilities (for a specific class) and the class probability that were calculated in the train method. We multiply these probabilities together for each class separately, and then compare them. Whichever is higher, this becomes the predicted class. We implemented the present features method. In this method we took all of the feature probabilities and sorted them. For each word, we accessed the probability for one class and for the other class. We compared these probabilities and returned the bigger one divided by the smaller one along with the class of the bigger one. Then we sort again based on how big the probability division numbers are and print the highest ones. We also implemented the train method. Here we iterated through a given training set to count how many times a feature appears given a certain class, and also how many instances of the class there are. We divided these counts by the totals (total features in the class and total instances of either class) to get a class probability for each class as well as probabilities for each feature in a given class. Lastly, we wrote our runner. Here, we began by taking in the pros doc and the cons doc and breaking them down by sentence and assigning them "pro" or "con" respectively. We then combined them and shuffled them randomly. We then split this data into a training set and testing set (assigning the majority of it to training). We then called our train method on this training set using a LocalAbstractClassifier. We then went through each feature set in the test data and used gamma to predict what class in belongs to. We checked this with the actual class and increased the correct count if the models classification was correct. We calculated the accuracy by dividing the number of correct classifications by the total number of attempts. Lastly we called on present features to show the most informative features
+## Description of the Solution
 
-## Most Informative Features Analysis
-The first element printed by our present_features is the name of the feature. In our case, this would be a word that appears in the corpus. The next element is a number representing how much more likely this word is to be a given class. This is calculated by looking at the probability that the word appears given the doc is class pro and the probability that the word appears given the doc is class con. The larger probability is divided by the smaller probability. The third element printed is the name of the class which had the higher probability. The features are presented in order of the highest number (second element), so the first few features shown are the ones that are very informative in the suggesting which class the doc is. We see some informative features like "awkward" and "issues" indicating that the doc is class con, and "neat" and "colorful" indicating that the doc is class pro.   
+First I implemented methods to perform on vectors. This involved calculating euclidean norms, dot products, and cosine similarities for use in ranking later. Then I implemented methods for documents. This included a method to get rid of any specified unwanted words, stem all of the words using SnowBall stemmer, and calculate the term frequency for a given term in the document. Then I implemented methods for corpuses. This included a method to return all of the unique words in the corpus and assigning an index to each. Also a method to check whether a term is present in a given document. Also a method to compute tf-idf scores using log(tf)*log(corpus size/df). Also a method to put all of the scores for a given document into a vector. Finally a method to create a matrix with the doc title and its vector with the scores. I also wrote test cases to cover obscure inputs
+
+## Key Takeaways
+
+I learned a lot about writing tests. I did not have much experience with this aspect of coding before this. I learned that writing test cases first can be helpful for the actually coding it out later because writing the tests forces you to understand the logic and what is supposed to happen in the code. It was also helpful to use my tests and write new ones as I was trying to get the logic right for my code.
