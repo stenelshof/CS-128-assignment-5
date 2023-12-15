@@ -34,7 +34,7 @@ The watch_runner can be used to run all of these methods on actual data (I am us
 In order utilize this, download your JSON data to your local machine. Choose which runner you are going to use and replace the file path in the first line of the main function with the file path to your JSON data. Then you can run the runner and see the results!
 
 ## Citations
-local_classifier_models and local_classifier_modles_tests code written with help from Luke Rozinskas and Mike Ryu
+local_classifier_models and local_classifier_models_tests code written with help from Luke Rozinskas and Mike Ryu
 
 search_runner and watch_runner code generated in part by ChatGBT using Mike Ryu's runner code from Assignment 4 under the following prompts:
 Change this runner to take in JSON data rather than a pickle file
