@@ -13,7 +13,7 @@ https://docs.google.com/presentation/d/1VKid3KqhRCCmL_1tKAzYqy7qDi4jQZwZKbNUIIP1
 * **Email(s)**: stenelshof@westmont.edu
 
 ## License Information
-MIT
+MIT (see the LICENSE file for more specifics)
 
 ## Structure
 The majority of this project's structure can be found within the Assignment-5 folder. Most of the code is located within the src/classifier folder and then within the local_classifier folder. The unittests are located just within the src/classifier. Aspects like the .gitignore and requirements.txt are within the Assignment-5 folder. The README and LICENSE are on the very outside.
@@ -32,11 +32,7 @@ The search_runner can be used to run all of these methods on actual data (I am u
 The watch_runner can be used to run all of these methods on actual data (I am using my YouTube watch-history data from google takeout in JSON format, other formats may not be compatible with the way the code is written). It uses a train/test split and outputs an accuracy score for the classifier as well as the most informative features for classifying what year a particular video watch is from.
 
 ## Citations
-classifier_models code from Mike Ryu in Assignment 4
-
-local_classifier_models from code written by myself and Luke Rozinskas for Assignment 4 (with changes to the build method)
-
-local_classifier_modles_tests from code written by myself and Luke Rozinskas for Assignment 4 (with changes to the build tests)
+local_classifier_models and local_classifier_modles_tests code written with help from Luke Rozinskas and Mike Ryu
 
 search_runner and watch_runner code generated in part by ChatGBT using Mike Ryu's runner code from Assignment 4 under the following prompts:
 Change this runner to take in JSON data rather than a pickle file
