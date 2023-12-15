@@ -6,7 +6,7 @@
 *Assistant Professor* Mike Ryu (mryu@westmont.edu) 
 
 ## Presentation Link
-
+https://docs.google.com/presentation/d/1VKid3KqhRCCmL_1tKAzYqy7qDi4jQZwZKbNUIIP11t8/edit#slide=id.p
 
 ## Author Information
 * **Name(s)**: Silas Ten Elshof
