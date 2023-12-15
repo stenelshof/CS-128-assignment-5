@@ -15,7 +15,12 @@
 ## License Information
 MIT
 
+## Structure
+The majority of this project's structure can be found within the Assignment-5 folder. Most of the code is located within the src/classifier folder and then within the local_classifier folder. The unittests are located just within the src/classifier. Aspects like the .gitignore and requirements.txt are within the Assignment-5 folder. The README and LICENSE are on the very outside.
+
 ## How to Utilize this Software
+Within the src/classifier folder:
+
 The classifier_models file consists of several abstract classes that are utilized at other points in the code
 
 The local_classifier_models consists of implementations of these classes. A build method is defined which builds feature sets based off of the words in the title of the source object. The gamma method can be called to give the predicted class for a given object. The present features method returns the top n most informative features for classifying. The present_features_string method is mainly for testing purposes. The train method takes in training data and calculates the counts and probabilities used by the gamma method.
