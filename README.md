@@ -31,6 +31,8 @@ The search_runner can be used to run all of these methods on actual data (I am u
 
 The watch_runner can be used to run all of these methods on actual data (I am using my YouTube watch-history data from google takeout in JSON format, other formats may not be compatible with the way the code is written). It uses a train/test split and outputs an accuracy score for the classifier as well as the most informative features for classifying what year a particular video watch is from.
 
+In order utilize this, download your JSON data to your local machine. Choose which runner you are going to use and replace the file path in the first line of the main function with the file path to your JSON data. Then you can run the runner and see the results!
+
 ## Citations
 local_classifier_models and local_classifier_modles_tests code written with help from Luke Rozinskas and Mike Ryu
 
