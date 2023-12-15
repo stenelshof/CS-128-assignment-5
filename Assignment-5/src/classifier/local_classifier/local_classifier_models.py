@@ -83,45 +83,39 @@ class LocalAbstractClassifier(AbstractClassifier):
 
     def present_features(self, top_n: int = 1) -> None:
         """Prints `top_n` feature(s) used by this classifier in the descending order of informativeness of the
-                feature in determining a class for any object. Informativeness of a feature is a quantity that represents
+               feature in determining a class for any object. Informativeness of a feature is a quantity that represents
                 how "good" a feature is in determining the class for an object.
 
                 :param top_n: how many of the top features to print; must be 1 or greater
-                """
+                 """
         #print(self.present_features_string(top_n))
-        if top_n < 1:
-            raise ValueError("top_n must be 1 or greater")
 
-        # Collect feature informativeness
         odd_ratio_collection = {}
-
         sorted_features = sorted(self.feature_probabilities.items(), key=lambda item: item[0])
-        # print(sorted_features)
-        for index in range(0, len(sorted_features), 2):
-            next_element = index + 1
 
+        # Use range with step 2 to iterate over every 2 elements
+        for index in range(0, len(sorted_features) - 1, 2):
+            # By iterating over every 2 elements, we grab their probabilities for each class
             feature1_prob = sorted_features[index][1]
             first_class = sorted_features[index][0][2]
-            feature2_prob = sorted_features[next_element][1]
-            second_class = sorted_features[next_element][0][2]
 
-            # feature_key, probability = sorted_features
-            # feature_name, feature_value, class_label = feature_key
+            # Calculate next_element to avoid recomputation
+            next_element = index + 1
 
-            if feature1_prob == 0.0:
-                feature1_prob = 0.00001
-            if feature2_prob == 0.0:
-                feature2_prob = 0.00001
-            if feature1_prob > feature2_prob:
-                # odd_ratio_collection[sorted_features[index[0][0]]] = {(feature1_prob/feature2_prob), first_class}
-                odd_ratio_collection[sorted_features[index][0][0]] = [(feature1_prob / feature2_prob), first_class]
+            # Check if next_element is within the bounds of the list
+            if next_element < len(sorted_features):
+                feature2_prob = sorted_features[next_element][1]
+                second_class = sorted_features[next_element][0][2]
 
-            else:
-                # odd_ratio_collection[sorted_features[next_element[0][0]]] = {(feature2_prob/feature1_prob), second_class}
-                odd_ratio_collection[sorted_features[next_element][0][0]] = [(feature2_prob / feature1_prob), second_class]
+                # Do some accounting for the divide by zero error
+                if feature1_prob == 0.0:
+                    feature1_prob = 0.00001
+                if feature2_prob == 0.0:
+                    feature2_prob = 0.00001
+                if feature1_prob > feature2_prob:
+                    odd_ratio_collection[sorted_features[index][0][0]] = [(feature1_prob / feature2_prob), first_class]
 
         sorted_odds = sorted(odd_ratio_collection.items(), key=lambda item: item[1][0], reverse=True)
-
         # Print the top N features
         print("Most Informative Features")
         for i in range(min(top_n, len(sorted_odds))):
@@ -132,30 +126,37 @@ class LocalAbstractClassifier(AbstractClassifier):
 
         sorted_features = sorted(self.feature_probabilities.items(), key=lambda item: item[0])
 
-        for index in range(0, len(sorted_features) - 1):
-            next_element = index + 1
-
+        # Use range with step 2 to iterate over every 2 elements
+        for index in range(0, len(sorted_features) - 1, 2):
             # By iterating over every 2 elements, we grab their probabilities for each class
             feature1_prob = sorted_features[index][1]
             first_class = sorted_features[index][0][2]
-            feature2_prob = sorted_features[next_element][1]
-            second_class = sorted_features[next_element][0][2]
 
-            # Do some accounting for the divide by zero error
-            if feature1_prob == 0.0:
-                feature1_prob = 0.00001
-            if feature2_prob == 0.0:
-                feature2_prob = 0.00001
-            if feature1_prob > feature2_prob:
-                odd_ratio_collection[sorted_features[index][0][0]] = [(feature1_prob / feature2_prob), first_class]
-            else:
-                odd_ratio_collection[sorted_features[next_element][0][0]] = [(feature2_prob / feature1_prob),
-                                                                             second_class]
+            # Calculate next_element to avoid recomputation
+            next_element = index + 1
 
+            # Check if next_element is within the bounds of the list
+            if next_element < len(sorted_features):
+                feature2_prob = sorted_features[next_element][1]
+                second_class = sorted_features[next_element][0][2]
+
+                # Do some accounting for the divide by zero error
+                if feature1_prob == 0.0:
+                    feature1_prob = 0.00001
+                if feature2_prob == 0.0:
+                    feature2_prob = 0.00001
+                if feature1_prob > feature2_prob:
+                    odd_ratio_collection[sorted_features[index][0][0]] = [(feature1_prob / feature2_prob), first_class]
+                else:
+                    # Check if next_element is within the bounds of the list
+                    if next_element < len(sorted_features):
+                        odd_ratio_collection[sorted_features[next_element][0][0]] = [(feature2_prob / feature1_prob),
+                                                                                     second_class]
 
         sorted_odds = sorted(odd_ratio_collection.items(), key=lambda item: item[1][0], reverse=True)
         result = [str(entry) for entry in sorted_odds[:top_n]]
         return result
+
     @classmethod
     def train(cls, training_set: Iterable[FeatureSet]) -> AbstractClassifier:
         """Method that builds a Classifier instance with its training (supervised learning) already completed. That is,

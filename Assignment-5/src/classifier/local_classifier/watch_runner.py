@@ -67,7 +67,7 @@ def main():
     print(f"Classifier Accuracy: {accuracy:.2%}")
 
     # Present the top features
-    classifier.present_features(top_n=1000)
+    classifier.present_features(top_n=500)
 
 
 if __name__ == "__main__":

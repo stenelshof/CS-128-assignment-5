@@ -135,7 +135,7 @@ class LocalAbstractClassifierTest(unittest.TestCase):
         classifier2 = LocalAbstractClassifier.train(training_set2)
         top_features2 = classifier2.present_features_string(top_n=3)
         print(top_features2)
-        expected_features = ["('good', [99999.99999999999, 'pro'])", "('bad', [66666.66666666666, 'con'])", "('terrible', [66666.66666666666, 'con'])"]
+        expected_features = ["('great', [99999.99999999999, 'pro'])", "('bad', [66666.66666666666, 'con'])", "('terrible', [66666.66666666666, 'con'])"]
         self.assertEqual(expected_features, top_features2)
 
         training_set3 = [
@@ -148,7 +148,7 @@ class LocalAbstractClassifierTest(unittest.TestCase):
         classifier3 = LocalAbstractClassifier.train(training_set3)
         top_features3 = classifier3.present_features_string(top_n=4)
         print(top_features3)
-        expected_features = ["('good', [99999.99999999999, 'pro'])", "('bad', [75000.0, 'con'])", "('terrible', [75000.0, 'con'])", "('horrible', [24999.999999999996, 'con'])"]
+        expected_features = ["('great', [99999.99999999999, 'pro'])", "('bad', [75000.0, 'con'])", "('terrible', [75000.0, 'con'])", "('horrible', [24999.999999999996, 'con'])"]
         self.assertEqual(expected_features, top_features3)
 
     def test_train(self):
